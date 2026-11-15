@@ -1,28 +1,19 @@
-# Education — weighted loot CDF
+# Education — weighted loot as a CDF
 
-> **Rung:** `npm test` passes. No live `orng.wax`.  
-> Use after you have a resolved entropy string from the ORNG infra labs.
-
-## What you should be able to do
-
-| Level | Skill |
-| --- | --- |
-| Beginner | Build exclusive CDF from positive weights |
-| Intermediate | `lower_bound`: first `cdf[i] > roll` |
-| Masterclass | Rejection sampling so `total` does not bias the modulus |
+Weights become an exclusive cumulative distribution. A roll in `[0, total)` picks the first band whose exclusive CDF is strictly greater than the roll — the same idea as `lower_bound` on a prefix array.
 
 ## Beginner
 
-Entries `{ id, weight }`. CDF is running sum of weights. `total` is the last CDF value. A fair roll is an integer in `0..total-1`.
+Table common 70 / rare 25 / legend 5 → CDF `[70, 95, 100]`. Rolls 0–69 common, 70–94 rare, 95–99 legend.
 
 ## Intermediate
 
-`pick(built, roll)` finds the first index where cumulative weight exceeds `roll`. Example: weights 1, 3, 6 → cdf `[1,4,10]`; roll `0` → first; roll `3` → second; roll `4..9` → third.
+Unbiased mod: do not take `uint32 % total` over the full 2^32 range. Reject the tail above the largest multiple of total that fits. `pickFromEntropy` reads the first four bytes of a 32-byte hex string.
 
-## Masterclass
+## Outcomes
 
-`rollFromUint32` uses rejection of the top of the `2^32` range so `value % total` is unbiased when `total` does not divide `2^32`. Returning `"reject"` means request new entropy, not force a bucket.
+1. Build the three-band table and pick boundary rolls.
+2. Show empty table / zero weight / duplicate id refusals.
+3. Show rejection at the U32 tail for total 100.
 
-## Will not teach
-
-Minting the loot NFT, bank economy, or oracle delivery (see dice / dual-callback).
+Numbers: [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md).
