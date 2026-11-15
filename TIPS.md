@@ -1,6 +1,7 @@
-# Tips — weighted tables
+# Tips
 
-- Keep weights integers; document percentages as `weight/total`.
-- Cap entry count (64 here) for CPU/RAM.
-- Never map `hash % total` without a rejection plan when total is awkward.
-- Related: [byte slicer](https://github.com/pixel-journey/px-orng-byte-slicer-multi-roll), [Fisher–Yates](https://github.com/pixel-journey/px-orng-fisher-yates-deck-shuffler).
+- CDF values in this lab are **exclusive** upper bounds. Roll `70` is rare, not common, because `70` is not `< 70`.
+- Build the CDF once per table version. Do not recompute weights with floats.
+- Reject and re-request when `rollFromUint32` returns `"reject"`. Folding the tail with `% total` biases the low residues.
+- Cap the table at 64. A longer list is a CPU and RAM problem on chain, and the test already refuses it.
+- Ids are a teaching charset. They are not AtomicAssets template ids.
