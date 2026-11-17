@@ -1,7 +1,18 @@
-# Tips
+# Tips — weighted CDF loot
 
-- CDF values in this lab are **exclusive** upper bounds. Roll `70` is rare, not common, because `70` is not `< 70`.
-- Build the CDF once per table version. Do not recompute weights with floats.
-- Reject and re-request when `rollFromUint32` returns `"reject"`. Folding the tail with `% total` biases the low residues.
-- Cap the table at 64. A longer list is a CPU and RAM problem on chain, and the test already refuses it.
-- Ids are a teaching charset. They are not AtomicAssets template ids.
+## Do
+
+- Build exclusive prefix CDFs; document the half-open intervals.  
+- Reject the U32 tail; never settle a biased sample.  
+- Cap table size (here 64) for RAM/CPU.  
+- Keep ids stable strings your UI and chain rows share.
+
+## Don't
+
+- Use floating-point weights in the contract path.  
+- Change band order without regenerating CDF and retesting boundaries.  
+- Treat entropy as optional after the drop is economically final.
+
+## Related
+
+[byte-slicer](https://github.com/pixel-journey/px-orng-byte-slicer-multi-roll) · [dice](https://github.com/pixel-journey/px-orng-dice-multi-tier-payout) · [dual-callback](https://github.com/pixel-journey/px-orng-dual-callback-idempotent) · [ORNG path](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/ORNG-LEARNING-PATH.md)

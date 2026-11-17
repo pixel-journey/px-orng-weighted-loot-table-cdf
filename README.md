@@ -1,11 +1,14 @@
-# Weighted loot table via exclusive CDF
+# Weighted loot table (CDF + unbiased mod)
 
-Prefix weights, lower_bound selection, rejection-sampled roll from entropy. Pure TypeScript; no live orng.
+Educational exclusive CDF loot picker with rejection-sampled uint32 reduction. Pure TypeScript; entropy is an argument.
 
 | Doc | Role |
 | --- | --- |
-| [EDUCATION.md](EDUCATION.md) | CDF intuition |
-| [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md) | 70/25/5 table |
+| [EDUCATION.md](EDUCATION.md) | Beginner → masterclass |
+| [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md) | Boundary rolls |
+| [TIPS.md](TIPS.md) | Fairness tips |
+| [SECURITY.md](SECURITY.md) | Gaps |
+| [SOURCES.md](SOURCES.md) | wax-orng |
 
 ```bash
 npm test

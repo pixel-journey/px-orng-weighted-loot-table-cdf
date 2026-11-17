@@ -1,10 +1,21 @@
-# Security notes — loot CDF
+# Security — loot CDF
 
-| Mitigated | Behavior |
+## Closed in tests
+
+| Issue | Behavior |
 | --- | --- |
-| Bad weights / ids | refused |
-| Roll out of range | refused |
-| Biased mod | reject tail |
-| Entry count | max 64 |
+| Empty / zero weight / duplicate / bad id | refused |
+| Roll outside [0, total) | bad roll |
+| Biased U32 tail | reject |
+| Bad entropy shape | refused |
+| Oversized table | refused |
 
-Production: freeze table hash on-chain; oracle once-only resolve; do not let clients supply weights at open time without governance.
+## Not closed
+
+| Concern | Guidance |
+| --- | --- |
+| Oracle delivery | once-resolve dual-callback |
+| Admin table edits | config version + auth |
+| Economic fairness | publish weights; avoid silent mid-event changes |
+
+No live oracle in this repository.
