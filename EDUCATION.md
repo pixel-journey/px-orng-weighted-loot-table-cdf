@@ -38,13 +38,9 @@ Official RNG context: [wax-orng](https://github.com/worldwide-asset-exchange/wax
 
 A single entry of weight 42 wins for rolls `0..41` only.
 
-### Words
-
-| Word | Meaning |
-| --- | --- |
-| Exclusive CDF | Prefix sums; band i is `[prev, cdf[i])` |
-| lower_bound idea | First index with `cdf[i] > roll` |
-| total | Sum of weights; roll domain is `[0, total)` |
+```bash
+npm test
+```
 
 ---
 
@@ -63,9 +59,18 @@ Accept only values below the largest multiple of `total` that fits in `2^32`. At
 
 `zz` and odd-length `abc` → `bad entropy`.
 
+### Attack → test
+
+| Attack | Lab behavior |
+| --- | --- |
+| Treat roll 70 as common | rare (exclusive upper bound) |
+| Settle rejected U32 | refused |
+| Weight 0 / empty / duplicate id | refused |
+| Greedy `weight %` without CDF | wrong product |
+
 ---
 
-## Masterclass — table hygiene and product angles
+## Masterclass — table hygiene
 
 ### Refusals (tested)
 
@@ -83,19 +88,20 @@ Accept only values below the largest multiple of `total` that fits in `2^32`. At
 2. Using inclusive upper bounds and double-counting boundaries.  
 3. Settling on a rejected U32 sample.  
 4. Building weights that sum to 0.  
-5. Assuming legend is "5% of rolls" without checking total is 100 — it is 5/100 only because total is 100.
-
-### Nice-to-have product extensions (not in this repo)
-
-- Pity counters (force rare after N commons) — new state machine + tests.  
-- Guaranteed legend on first open — separate table or override path.  
-- Multi-roll from one checksum — [byte-slicer](https://github.com/pixel-journey/px-orng-byte-slicer-multi-roll).  
-- On-chain table updates under config version — [invariant-kit](https://github.com/pixel-journey/px-invariant-kit) `version.ts`.
-
-Numbers: [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md).
+5. Assuming legend is "5% of rolls" without checking total is 100.
 
 ### Exercises
 
-1. Roll 69 vs 70 — which bands?  
-2. Why is `uint32 % 100` over all uint32 biased?  
-3. Does this lab call `orng.wax`? (No.)
+1. Roll 69 vs 70 — which bands? (**common** vs **rare**.)  
+2. Why is `uint32 % 100` over all uint32 biased? (`2^32 % 100 ≠ 0`.)  
+3. Does this lab call `orng.wax`? (**No**.)
+
+Numbers: [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md) · [SECURITY](SECURITY.md) · [SOURCES](SOURCES.md).
+
+---
+
+## What this course will not teach
+
+- Pity counters / guaranteed legend without new tests
+- Live oracle auth
+- That exclusive CDF is the same as percentage labels in a UI
