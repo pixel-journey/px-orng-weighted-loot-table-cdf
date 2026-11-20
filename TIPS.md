@@ -28,4 +28,4 @@
 | Multi-roll from one seed | [byte-slicer](https://github.com/pixel-journey/px-orng-byte-slicer-multi-roll) |
 | On-chain weight governance | Config version + msig |
 
-Related: [byte-slicer](https://github.com/pixel-journey/px-orng-byte-slicer-multi-roll) · [dice](https://github.com/pixel-journey/px-orng-dice-multi-tier-payout) · [dual-callback](https://github.com/pixel-journey/px-orng-dual-callback-idempotent) · [ORNG path](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/ORNG-LEARNING-PATH.md)
+Related: [byte-slicer](https://github.com/pixel-journey/px-orng-byte-slicer-multi-roll) · [dice](https://github.com/pixel-journey/px-orng-dice-multi-tier-payout) · [dual-callback](https://github.com/pixel-journey/px-orng-dual-callback-idempotent) · `px-contract-examples-vault` (private index; not this public course)

@@ -18,4 +18,4 @@ Table size cap **64** is a teaching bound for RAM/CPU.
 | [dice](https://github.com/pixel-journey/px-orng-dice-multi-tier-payout) | Single-modulus game book |
 | [Fisher–Yates](https://github.com/pixel-journey/px-orng-fisher-yates-deck-shuffler) | Chained sub-seeds (not CDF bands) |
 | [dual-callback](https://github.com/pixel-journey/px-orng-dual-callback-idempotent) | Once-resolve before roll |
-| [ORNG path](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/ORNG-LEARNING-PATH.md) | Curriculum + reject windows |
+| `px-contract-examples-vault` (private index; not this public course) | Curriculum + reject windows |
